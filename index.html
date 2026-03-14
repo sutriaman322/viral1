@@ -1,120 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Generator Kartu Idul Fitri</title>
+<title>Idul Fitri Card Generator</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
-  <body class="bg-green-900 text-white min-h-screen p-6">
-    <h1 class="text-3xl font-bold text-center mb-6">
-      🌙 Generator Kartu Idul Fitri
-    </h1>
+</head>
 
-    <div class="max-w-xl mx-auto bg-white text-gray-800 p-6 rounded-xl">
-      <input
-        id="from"
-        placeholder="Nama Anda"
-        class="border p-2 rounded w-full mb-3"
-      />
+<body class="bg-gray-100 min-h-screen">
 
-      <input
-        id="to"
-        placeholder="Nama Penerima"
-        class="border p-2 rounded w-full mb-4"
-      />
+<!-- HEADER -->
 
-      <label class="font-semibold">Pilih Template</label>
+<header class="bg-green-700 text-white p-4 shadow">
+<div class="max-w-6xl mx-auto flex justify-between items-center">
 
-      <select id="template" class="border p-2 rounded w-full mb-4">
-        <option value="green">Masjid Hijau</option>
-        <option value="gold">Gold Elegant</option>
-        <option value="night">Malam Takbir</option>
-      </select>
+<h1 class="text-xl font-bold">
+🌙 Idul Fitri Card Generator
+</h1>
 
-      <button
-        onclick="generateCard()"
-        class="bg-green-600 text-white px-4 py-2 rounded w-full"
-      >
-        Buat Kartu
-      </button>
+<p class="text-sm opacity-80">
+Buat kartu ucapan profesional
+</p>
 
-      <div id="preview" class="hidden mt-6">
-        <div id="card" class="p-6 rounded-lg text-center text-white">
-          <h2 class="text-2xl mb-3">Selamat Idul Fitri</h2>
+</div>
+</header>
 
-          <p id="toText"></p>
 
-          <p class="mt-3">Taqabbalallahu minna wa minkum</p>
+<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 p-6">
 
-          <p class="mt-4" id="fromText"></p>
-        </div>
+<!-- PANEL KONTROL -->
 
-        <button
-          onclick="downloadCard()"
-          class="mt-4 bg-blue-500 text-white px-4 py-2 rounded w-full"
-        >
-          Download Kartu
-        </button>
+<div class="bg-white rounded-xl shadow p-6">
 
-        <a
-          id="wa"
-          target="_blank"
-          class="mt-3 block bg-green-500 text-white px-4 py-2 rounded text-center"
-        >
-          Share WhatsApp
-        </a>
-      </div>
-    </div>
+<h2 class="text-lg font-semibold mb-4">
+Pengaturan Kartu
+</h2>
 
-    <script>
-      function generateCard() {
-        let from = document.getElementById("from").value;
-        let to = document.getElementById("to").value;
-        let template = document.getElementById("template").value;
+<input id="from"
+placeholder="Nama Anda"
+class="border p-2 rounded w-full mb-3">
 
-        let card = document.getElementById("card");
+<input id="to"
+placeholder="Nama Penerima"
+class="border p-2 rounded w-full mb-4">
 
-        if (template == "green") {
-          card.style.background = "linear-gradient(135deg,#16a34a,#065f46)";
-        }
+<label class="font-semibold text-sm">Template</label>
 
-        if (template == "gold") {
-          card.style.background = "linear-gradient(135deg,#b45309,#facc15)";
-        }
+<select id="template"
+class="border p-2 rounded w-full mb-4">
 
-        if (template == "night") {
-          card.style.background = "linear-gradient(135deg,#1e3a8a,#020617)";
-        }
+<option value="green">Masjid Hijau</option>
+<option value="gold">Gold Elegant</option>
+<option value="night">Malam Takbir</option>
 
-        document.getElementById("toText").innerText = "Untuk: " + to;
-        document.getElementById("fromText").innerText = "Dari: " + from;
+</select>
 
-        document.getElementById("preview").classList.remove("hidden");
+<button onclick="generateCard()"
+class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full">
 
-        let pesan =
-          "🌙 Selamat Idul Fitri\n\nUntuk: " +
-          to +
-          "\n\nMohon maaf lahir batin\n\nDari: " +
-          from;
+Generate Kartu
 
-        document.getElementById("wa").href =
-          "https://wa.me/?text=" + encodeURIComponent(pesan);
-      }
+</button>
 
-      function downloadCard() {
-        html2canvas(document.getElementById("card")).then((canvas) => {
-          let link = document.createElement("a");
-          link.download = "kartu-idulfitri.png";
-          link.href = canvas.toDataURL();
-          link.click();
-        });
-      }
-    </script>
+<button onclick="downloadCard()"
+class="mt-3 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full">
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  </body>
+Download Kartu
+
+</button>
+
+<a id="wa"
+target="_blank"
+class="mt-3 block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+
+Share WhatsApp
+
+</a>
+
+</div>
+
+
+
+<!-- PREVIEW -->
+
+<div class="flex items-center justify-center">
+
+<div id="card"
+class="w-full max-w-md h-80 rounded-xl shadow-lg text-white flex flex-col justify-center items-center text-center p-6 bg-green-600">
+
+<h2 class="text-3xl font-bold mb-3">
+Selamat Idul Fitri
+</h2>
+
+<p id="toText" class="text-lg"></p>
+
+<p class="mt-4">
+Taqabbalallahu minna wa minkum
+</p>
+
+<p id="fromText" class="mt-6 text-lg"></p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function generateCard(){
+
+let from = document.getElementById("from").value
+let to = document.getElementById("to").value
+let template = document.getElementById("template").value
+
+let card = document.getElementById("card")
+
+if(template=="green"){
+card.style.background="linear-gradient(135deg,#16a34a,#065f46)"
+}
+
+if(template=="gold"){
+card.style.background="linear-gradient(135deg,#b45309,#facc15)"
+}
+
+if(template=="night"){
+card.style.background="linear-gradient(135deg,#1e3a8a,#020617)"
+}
+
+document.getElementById("toText").innerText="Untuk: "+to
+document.getElementById("fromText").innerText="Dari: "+from
+
+
+let pesan =
+"🌙 Selamat Idul Fitri\n\nUntuk: "+to+
+"\n\nTaqabbalallahu minna wa minkum\nMohon maaf lahir dan batin\n\nDari: "+from
+
+document.getElementById("wa").href =
+"https://wa.me/?text="+encodeURIComponent(pesan)
+
+}
+
+
+function downloadCard(){
+
+html2canvas(document.getElementById("card")).then(canvas=>{
+
+let link=document.createElement("a")
+link.download="kartu-idulfitri.png"
+link.href=canvas.toDataURL()
+link.click()
+
+})
+
+}
+
+</script>
+
+</body>
 </html>
