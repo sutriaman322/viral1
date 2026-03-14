@@ -4,70 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Idul Fitri Card Generator</title>
+<title>Idul Fitri Card App</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 </head>
 
-<body class="bg-gray-100 min-h-screen">
+<body class="min-h-screen bg-cover bg-center flex items-center justify-center p-6"
+style="background-image:url('https://images.unsplash.com/photo-1591608515484-9f6c7b9c8f0f');">
 
-<!-- HEADER -->
+<div class="w-full max-w-6xl grid md:grid-cols-2 gap-8">
 
-<header class="bg-green-700 text-white p-4 shadow">
-<div class="max-w-6xl mx-auto flex justify-between items-center">
+<!-- PANEL CONTROL -->
 
-<h1 class="text-xl font-bold">
-🌙 Idul Fitri Card Generator
+<div class="bg-white/90 backdrop-blur rounded-2xl shadow-xl p-6">
+
+<h1 class="text-2xl font-bold text-green-700 mb-4">
+🌙 Idul Fitri Card Creator
 </h1>
 
-<p class="text-sm opacity-80">
-Buat kartu ucapan profesional
+<p class="text-gray-600 mb-6">
+Buat kartu ucapan Idul Fitri dengan desain modern.
 </p>
-
-</div>
-</header>
-
-
-<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 p-6">
-
-<!-- PANEL KONTROL -->
-
-<div class="bg-white rounded-xl shadow p-6">
-
-<h2 class="text-lg font-semibold mb-4">
-Pengaturan Kartu
-</h2>
 
 <input id="from"
 placeholder="Nama Anda"
-class="border p-2 rounded w-full mb-3">
+class="border p-3 rounded w-full mb-3">
 
 <input id="to"
 placeholder="Nama Penerima"
-class="border p-2 rounded w-full mb-4">
+class="border p-3 rounded w-full mb-4">
 
-<label class="font-semibold text-sm">Template</label>
+<label class="text-sm font-semibold">
+Pilih Tema
+</label>
 
-<select id="template"
-class="border p-2 rounded w-full mb-4">
+<select id="theme"
+class="border p-3 rounded w-full mb-4">
 
-<option value="green">Masjid Hijau</option>
-<option value="gold">Gold Elegant</option>
-<option value="night">Malam Takbir</option>
+<option value="emerald">Emerald Mosque</option>
+<option value="gold">Golden Eid</option>
+<option value="night">Night Takbir</option>
 
 </select>
 
 <button onclick="generateCard()"
-class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full">
+class="bg-green-600 hover:bg-green-700 text-white p-3 rounded w-full">
 
 Generate Kartu
 
 </button>
 
 <button onclick="downloadCard()"
-class="mt-3 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full">
+class="mt-3 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded w-full">
 
 Download Kartu
 
@@ -75,7 +65,7 @@ Download Kartu
 
 <a id="wa"
 target="_blank"
-class="mt-3 block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+class="mt-3 block text-center bg-green-500 hover:bg-green-600 text-white p-3 rounded">
 
 Share WhatsApp
 
@@ -85,12 +75,12 @@ Share WhatsApp
 
 
 
-<!-- PREVIEW -->
+<!-- PREVIEW CARD -->
 
 <div class="flex items-center justify-center">
 
 <div id="card"
-class="w-full max-w-md h-80 rounded-xl shadow-lg text-white flex flex-col justify-center items-center text-center p-6 bg-green-600">
+class="w-full max-w-md h-96 rounded-2xl shadow-2xl text-white flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-green-600 to-emerald-800">
 
 <h2 class="text-3xl font-bold mb-3">
 Selamat Idul Fitri
@@ -98,11 +88,12 @@ Selamat Idul Fitri
 
 <p id="toText" class="text-lg"></p>
 
-<p class="mt-4">
-Taqabbalallahu minna wa minkum
+<p class="mt-4 opacity-90">
+Taqabbalallahu minna wa minkum  
+Mohon maaf lahir dan batin
 </p>
 
-<p id="fromText" class="mt-6 text-lg"></p>
+<p id="fromText" class="mt-6 text-lg font-semibold"></p>
 
 </div>
 
@@ -115,33 +106,32 @@ Taqabbalallahu minna wa minkum
 
 function generateCard(){
 
-let from = document.getElementById("from").value
-let to = document.getElementById("to").value
-let template = document.getElementById("template").value
+let from=document.getElementById("from").value
+let to=document.getElementById("to").value
+let theme=document.getElementById("theme").value
 
-let card = document.getElementById("card")
+let card=document.getElementById("card")
 
-if(template=="green"){
-card.style.background="linear-gradient(135deg,#16a34a,#065f46)"
+if(theme=="emerald"){
+card.style.background="linear-gradient(135deg,#059669,#064e3b)"
 }
 
-if(template=="gold"){
+if(theme=="gold"){
 card.style.background="linear-gradient(135deg,#b45309,#facc15)"
 }
 
-if(template=="night"){
+if(theme=="night"){
 card.style.background="linear-gradient(135deg,#1e3a8a,#020617)"
 }
 
 document.getElementById("toText").innerText="Untuk: "+to
 document.getElementById("fromText").innerText="Dari: "+from
 
-
 let pesan =
 "🌙 Selamat Idul Fitri\n\nUntuk: "+to+
 "\n\nTaqabbalallahu minna wa minkum\nMohon maaf lahir dan batin\n\nDari: "+from
 
-document.getElementById("wa").href =
+document.getElementById("wa").href=
 "https://wa.me/?text="+encodeURIComponent(pesan)
 
 }
